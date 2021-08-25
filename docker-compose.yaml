@@ -3,8 +3,7 @@ version: '2'
 services:
   grafana:
     image: grafana/grafana:latest
-    ports:
-      - 3000:3000
+    network_mode: host
     user: '104'
     volumes: 
       - ./cli/configs/grafana/grafana.ini:/etc/grafana/grafana.ini:z
