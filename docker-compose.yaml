@@ -7,10 +7,10 @@ services:
       - 3000:3000
     user: '104'
     volumes: 
-      - ./cli/configs/grafana.ini:/etc/grafana/grafana.ini:z
+      - ./cli/configs/grafana/grafana.ini:/etc/grafana/grafana.ini:z
   prometheus:
     image: prom/prometheus
     network_mode: host
 
     volumes: 
-      - ./cli/configs/prometheus.yml:/etc/prometheus/prometheus.yml:z
+      - ./cli/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:z
