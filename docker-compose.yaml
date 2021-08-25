@@ -7,6 +7,8 @@ services:
     user: '104'
     volumes: 
       - ./cli/configs/grafana/grafana.ini:/etc/grafana/grafana.ini:z
+      - ./cli/configs/grafana/provisioning:/etc/grafana/provisioning:z
+      - ./cli/configs/grafana/dashboards:/var/lib/grafana/dashboards:z
   prometheus:
     image: prom/prometheus
     network_mode: host
