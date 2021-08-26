@@ -1,0 +1,21 @@
+deployment-type: docker-compose # either of docker-compose, kubectl files, ansible playlists ...
+process-model: # divides the desing requirements into categories
+  realtime: true
+stages: 
+  ingestion:
+    - storage:
+        type: series # types: document, relational, series, unstructured (custom script)
+        protocol: http
+        persistence: true
+      polling: true # push or pull based data ingestion
+      custom-config: ./cli/configs/prometheus
+      id: backend1
+      implementation: Prometheus
+    - view:
+        custom-config: ./cli/confgis/grafana
+        implementation: Grafana
+        id: view1
+  processing:
+  output:
+    backend1:
+      links: view1
