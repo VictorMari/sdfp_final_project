@@ -1,0 +1,4 @@
+FROM node:latest
+COPY build .
+RUN npm install -g http-server
+CMD ["http-server"] 

@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://labosis.com",
+    "title": "Prandium extract",
+    "description": "Meal metadata tracking",
+    "type": "object",
+    "properties": {
+        "date": {
+            "type": "string",
+            "format": "date"
+        },
+        "meals": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "type": "string",
+                        "format": "time"
+                    },
+                    "ingredients": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "ammount": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ]
+                        }
+                    },
+                    "preparation": {
+                        "type": [
+                            "string"
+                        ]
+                    }
+                },
+                "required": [
+                    "ingredients",
+                    "preparation",
+                    "time"
+                ]
+            }
+        }
+    },
+    "additionalProperties": false
+}

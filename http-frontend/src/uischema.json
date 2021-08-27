@@ -1,0 +1,29 @@
+{
+  "type": "Group",
+  "label": "Prandium writings",
+  "elements": [
+    {
+      "type": "HorizontalLayout",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+             {
+               "type": "Control",
+               "scope": "#/properties/date"
+             }
+          ]
+        },
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "ListWithDetail",
+              "scope": "#/properties/meals"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
