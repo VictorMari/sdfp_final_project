@@ -1,6 +1,4 @@
 deployment-type: docker-compose # either of docker-compose, kubectl files, ansible playlists ...
-process-model: # divides the desing requirements into categories
-  realtime: true
 stages: 
   ingestion:
     - storage:

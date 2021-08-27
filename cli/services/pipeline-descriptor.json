@@ -1,0 +1,31 @@
+{
+    "deployment-type": "docker-compose",
+    "stages": {
+      "ingestion": [
+        {
+          "storage": {
+            "type": "series",
+            "protocol": "http",
+            "persistence": true
+          },
+          "polling": true,
+          "custom-config": "./cli/configs/prometheus",
+          "id": "backend1",
+          "implementation": "Prometheus"
+        },
+        {
+          "view": {
+            "custom-config": "./cli/confgis/grafana",
+            "implementation": "Grafana",
+            "id": "view1"
+          }
+        }
+      ],
+      "processing": null,
+      "output": {
+        "backend1": {
+          "links": "view1"
+        }
+      }
+    }
+  }
