@@ -1,31 +1,34 @@
 {
-    "deployment-type": "docker-compose",
-    "stages": {
-      "ingestion": [
-        {
-          "storage": {
-            "type": "series",
-            "protocol": "http",
-            "persistence": true
-          },
-          "polling": true,
-          "custom-config": "./cli/configs/prometheus",
-          "id": "backend1",
-          "implementation": "Prometheus"
+  "deployment-type": "docker-compose",
+  "stages": {
+    "ingestion": [
+      {
+        "storage": {
+          "type": "series",
+          "protocol": "http",
+          "persistence": true
         },
-        {
-          "view": {
-            "custom-config": "./cli/confgis/grafana",
-            "implementation": "Grafana",
-            "id": "view1"
-          }
-        }
-      ],
-      "processing": null,
-      "output": {
-        "backend1": {
-          "links": "view1"
-        }
+        "polling": true,
+        "custom-config": "./cli/configs/prometheus/prometheus.yml",
+        "id": "backend1",
+        "implementation": "Prometheus"
+      },
+      {
+        "view": {
+          "type": "panel",
+          "protocol": "http",
+          "persistence": true
+        },
+        "custom-config": "./cli/configs/grafana/grafana.ini",
+        "implementation": "Grafana",
+        "id": "view1"
+      }
+    ],
+    "processing": [],
+    "output": {
+      "backend1": {
+        "links": "view1"
       }
     }
   }
+}

@@ -1,17 +1,12 @@
-version: '2'
-
 services:
   grafana:
     image: grafana/grafana:latest
     network_mode: host
     user: '104'
-    volumes: 
-      - ./cli/configs/grafana/grafana.ini:/etc/grafana/grafana.ini:z
-      - ./cli/configs/grafana/provisioning:/etc/grafana/provisioning:z
-      - ./cli/configs/grafana/dashboards:/var/lib/grafana/dashboards:z
+    volumes: ['./cli/configs/grafana/provisioning:/etc/grafana/provisioning:z', './cli/configs/grafana/dashboards:/var/lib/grafana/dashboards:z',
+      './cli/configs/grafana/grafana.ini:/etc/grafana/grafana.ini:z']
   prometheus:
     image: prom/prometheus
     network_mode: host
-
-    volumes: 
-      - ./cli/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:z
+    volumes: ['./cli/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:z']
+version: '2'
