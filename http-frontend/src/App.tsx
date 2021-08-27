@@ -11,8 +11,6 @@ import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
-import RatingControl from './RatingControl';
-import ratingControlTester from './ratingControlTester';
 import { makeStyles } from '@material-ui/core/styles';
 import { GpsFixedTwoTone } from '@material-ui/icons';
 
@@ -50,7 +48,6 @@ const initialData = {
 const renderers = [
   ...materialRenderers,
   //register custom renderers
-  { tester: ratingControlTester, renderer: RatingControl },
 ];
 
 const App = () => {

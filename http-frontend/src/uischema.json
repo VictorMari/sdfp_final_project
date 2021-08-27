@@ -10,16 +10,11 @@
           "elements": [
              {
                "type": "Control",
-               "scope": "#/properties/date"
-             }
-          ]
-        },
-        {
-          "type": "VerticalLayout",
-          "elements": [
-            {
-              "type": "ListWithDetail",
-              "scope": "#/properties/meals"
+               "scope": "#/properties/deployment-type"
+             },
+             {
+              "type": "Control",
+              "scope": "#/properties/stages"
             }
           ]
         }
