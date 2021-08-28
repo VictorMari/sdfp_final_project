@@ -13,24 +13,14 @@
                     "items": {
                         "type": "object",
                         "properties": {
-                            "storage": {
-                                "type": "object",
-                                "properties": {
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "protocol": {
-                                        "type": "string"
-                                    },
-                                    "persistence": {
-                                        "type": "boolean"
-                                    }
-                                },
-                                "required": [
-                                    "persistence",
-                                    "protocol",
-                                    "type"
-                                ]
+                            "type": {
+                                "type": "string"
+                            },
+                            "protocol": {
+                                "type": "string"
+                            },
+                            "persistence": {
+                                "type": "boolean"
                             },
                             "polling": {
                                 "type": "boolean"
@@ -43,66 +33,19 @@
                             },
                             "implementation": {
                                 "type": "string"
-                            },
-                            "view": {
-                                "type": "object",
-                                "properties": {
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "protocol": {
-                                        "type": "string"
-                                    },
-                                    "persistence": {
-                                        "type": "boolean"
-                                    }
-                                },
-                                "required": [
-                                    "persistence",
-                                    "protocol",
-                                    "type"
-                                ]
                             }
-                        },
-                        "required": [
-                            "custom-config",
-                            "id",
-                            "implementation"
-                        ]
+                        }
                     }
                 },
                 "processing": {
                     "type": "array"
                 },
                 "output": {
-                    "type": "object",
-                    "properties": {
-                        "backend1": {
-                            "type": "object",
-                            "properties": {
-                                "links": {
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "links"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "backend1"
-                    ]
+                    "type": "string"
                 }
-            },
-            "required": [
-                "ingestion",
-                "output",
-                "processing"
-            ]
+            }
+          
         }
-    },
-    "required": [
-        "deployment-type",
-        "stages"
-    ]
+    }
+  
 }

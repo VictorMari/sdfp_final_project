@@ -1,20 +1,26 @@
 {
   "type": "Group",
-  "label": "Prandium writings",
+  "label": "Iaac input form",
   "elements": [
     {
-      "type": "HorizontalLayout",
+      "type": "VerticalLayout",
       "elements": [
         {
-          "type": "VerticalLayout",
+          "type": "Control",
+          "scope": "#/properties/stages/properties/ingestion"
+        },
+       
+        {
+          "type": "HorizontalLayout",
+          "label": "deployment type",
           "elements": [
-             {
-               "type": "Control",
-               "scope": "#/properties/deployment-type"
-             },
-             {
+            {
               "type": "Control",
-              "scope": "#/properties/stages"
+              "scope": "#/properties/stages/properties/output"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/deployment-type"
             }
           ]
         }
