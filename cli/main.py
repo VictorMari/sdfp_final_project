@@ -1,5 +1,6 @@
 import json
 import yaml
+import sys
 from flask import Flask, render_template, request, session, redirect, url_for, make_response, send_file, abort
 from pathlib import Path
 
@@ -12,11 +13,16 @@ class Server:
         def parse_specifications():
             body_data = request.get_json()
             if body_data:
+                try:
+                    pipeline_generator(body_data)
+                except Exception as e:
+                    print(e)
                 return body_data
             else:
                 return {
                     "Error": "No body found"
                 }
+           
 
     def listen(self):
         self.app.run(host="127.0.0.1", port=8082, debug=True)
@@ -78,6 +84,7 @@ class DockerCompose(Strategy):
 
 
     def generate_artifact(self):
+        print("Dumping")
         with Path("docker-compose.yaml").open("w") as file:
             yaml.safe_dump(self.docker_compose, file)
 
@@ -96,7 +103,7 @@ def load_pipeline_descriptor():
 
 
 
-def generate_pipeline(specifications):
+def generate_pipeline(specifications=None):
     # extract this to a method
     # call the method from the http rquest of the ui without creating the pipeline descriptor
     if not specifications:
@@ -126,5 +133,8 @@ def generate_pipeline(specifications):
 
 
 if __name__ == '__main__':
-   test_server = Server(generate_pipeline)
-   test_server.listen()
+    if sys.argv[1] == "server=True":
+        test_server = Server(generate_pipeline)
+        test_server.listen()
+    else:
+        generate_pipeline()
