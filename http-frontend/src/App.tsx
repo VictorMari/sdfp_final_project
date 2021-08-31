@@ -65,13 +65,13 @@ const App = () => {
 
 
   const downloadData = () => {
-    console.log("Download data")
-    let downloadLink = document.createElement("a");
     let formData = JSON.parse(displayDataAsString)  
-    let fileTitle = formData["date"] + "meals.json" 
-    downloadLink.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(displayDataAsString));
-    downloadLink.setAttribute("download", fileTitle);
-    downloadLink.click();
+    fetch("/", {
+      method: "POST",
+      body: displayDataAsString
+    })
+    .then(e => console.log(e))
+    .catch(e => console.log(e))
   };
 
 
@@ -88,7 +88,7 @@ const App = () => {
               onClick={downloadData}
               color='primary'
               variant='contained'>
-          Download Json data
+          Send Specifications
         </Button>
       </div>
 
