@@ -1,6 +1,26 @@
 import json
 import yaml
+from flask import Flask, render_template, request, session, redirect, url_for, make_response, send_file, abort
 from pathlib import Path
+
+
+
+class Server:
+    def __init__(self, pipeline_generator) -> None:
+        self.app = Flask(__name__)
+        @self.app.route('/', methods=["POST"])
+        def parse_specifications():
+            body_data = request.get_json()
+            if body_data:
+                return body_data
+            else:
+                return {
+                    "Error": "No body found"
+                }
+
+    def listen(self):
+        self.app.run(host="127.0.0.1", port=8082, debug=True)
+
 
 
 class Strategy:
@@ -56,11 +76,6 @@ class DockerCompose(Strategy):
         stage_implementation = implementation_strategy[implementation_type]
         stage_implementation()
 
-    def add_output_stage(self, stage_info):
-        pass
-
-    def add_processing_stage(self, stage_info):
-        pass
 
     def generate_artifact(self):
         with Path("docker-compose.yaml").open("w") as file:
@@ -78,20 +93,16 @@ def load_pipeline_descriptor():
         return json.load(file)
 
 
-def load_deployment_strategy():
-    pass
 
 
-def start_ui():
-    pass
 
-
-def start_back_end():
-    pass
-
-
-if __name__ == '__main__':
-    pipeline_descriptor = load_pipeline_descriptor()
+def generate_pipeline(specifications):
+    # extract this to a method
+    # call the method from the http rquest of the ui without creating the pipeline descriptor
+    if not specifications:
+        pipeline_descriptor = load_pipeline_descriptor()
+    else:
+        pipeline_descriptor = specifications
 
     deployment_type = pipeline_descriptor["deployment-type"]
     deployment_generator = deployments[deployment_type]
@@ -111,3 +122,9 @@ if __name__ == '__main__':
         deployment_pipeline.add_output_stage(stage)
 
     deployment_pipeline.generate_artifact()
+
+
+
+if __name__ == '__main__':
+   test_server = Server(generate_pipeline)
+   test_server.listen()
