@@ -34,7 +34,7 @@
                             },
                             "implementation": {
                                 "type": "string",
-                                "enum": ["Prometheus", "Grafana"]
+                                "enum": ["Prometheus", "Grafana", "node-exporter"]
                             }
                         }
                     }
