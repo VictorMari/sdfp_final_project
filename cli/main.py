@@ -1,7 +1,7 @@
 import json
 import yaml
 import sys
-from flask import Flask, send_from_directory, request, session, redirect, url_for, make_response, send_file, abort
+from flask import Flask, send_from_directory, request, Response, session, redirect, url_for, make_response, send_file, abort
 from pathlib import Path
 
 
@@ -12,16 +12,26 @@ class Server:
         @self.app.route('/', methods=["POST"])
         def parse_specifications():
             body_data = request.get_json()
+            if not "output" in body_data["stages"]:
+                body_data["stages"]["output"] = ""
+            if not "processing" in body_data["stages"]:
+                body_data["stages"]["processing"] = []
+
             if body_data:
                 try:
                     pipeline_generator(body_data)
                 except Exception as e:
+                    print(json.dumps(body_data, indent=4))
                     print(e)
+                    return Response(json.dumps({
+                        "error": "Error while executing the configuration"
+                    }), status=400, mimetype='application/json') 
                 return body_data
             else:
-                return {
-                    "Error": "No body found"
-                }
+                return Response(json.dumps({
+                    "error": "No body provided"
+                }), status=400, mimetype='application/json') 
+                
         
         @self.app.route('/', methods=["GET"])
         def load_main_page():

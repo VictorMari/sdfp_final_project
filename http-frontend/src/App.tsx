@@ -68,10 +68,16 @@ const App = () => {
     let formData = JSON.parse(displayDataAsString)  
     fetch("/", {
       method: "POST",
-      body: displayDataAsString
+      body: displayDataAsString,
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
-    .then(e => console.log(e))
-    .catch(e => console.log(e))
+    .then(e => alert("Submitted successfully"))
+    .catch(e => {
+      console.log(e)
+      alert(e.body)
+    })
   };
 
 
