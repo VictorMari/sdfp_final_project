@@ -1,7 +1,7 @@
 import json
 import yaml
 import sys
-from flask import Flask, render_template, request, session, redirect, url_for, make_response, send_file, abort
+from flask import Flask, send_from_directory, request, session, redirect, url_for, make_response, send_file, abort
 from pathlib import Path
 
 
@@ -22,7 +22,11 @@ class Server:
                 return {
                     "Error": "No body found"
                 }
-           
+        
+        @self.app.route('/', methods=["GET"])
+        def load_main_page():
+            return send_from_directory("static","index.html")
+
 
     def listen(self):
         self.app.run(host="127.0.0.1", port=8082, debug=True)
@@ -84,7 +88,6 @@ class DockerCompose(Strategy):
 
 
     def generate_artifact(self):
-        print("Dumping")
         with Path("docker-compose.yaml").open("w") as file:
             yaml.safe_dump(self.docker_compose, file)
 
@@ -133,7 +136,7 @@ def generate_pipeline(specifications=None):
 
 
 if __name__ == '__main__':
-    if sys.argv[1] == "server=True":
+    if len(sys.argv) > 1 and sys.argv[1] == "server=True":
         test_server = Server(generate_pipeline)
         test_server.listen()
     else:

@@ -2,6 +2,7 @@
   "name": "jsonforms-react-seed",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://localhost:3000/static",
   "dependencies": {
     "@jsonforms/core": "^2.5.1",
     "@jsonforms/material-renderers": "^2.5.1",
