@@ -15,3 +15,8 @@ services:
 
     volumes: 
       - ./cli/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:z
+
+  node-exporter:
+    image: prom/node-exporter
+    ports:
+      - '9100:9100'

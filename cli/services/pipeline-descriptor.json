@@ -18,6 +18,13 @@
         "custom-config": "./cli/configs/grafana/grafana.ini",
         "implementation": "Grafana",
         "id": "view1"
+      },
+      {
+        "type": "metrics",
+        "protocol": "http",
+        "persistence": true,
+        "implementation": "node-exporter",
+        "id": "view2"
       }
     ],
     "processing": [],

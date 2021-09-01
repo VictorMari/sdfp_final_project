@@ -87,9 +87,16 @@ class DockerCompose(Strategy):
                 ]
             }
 
+        def generate_node_exporter_binding():
+            self.docker_compose["services"]["node-exporter"] = {
+                "image": "prom/node-exporter",
+                "ports": ["9100:9100"]
+            }
+
         implementation_strategy = {
             "Prometheus": generate_prometheus_binding,
-            "Grafana": generate_grafana_binding
+            "Grafana": generate_grafana_binding,
+            "node-exporter": generate_node_exporter_binding
         }
 
         implementation_type = stage_info["implementation"]

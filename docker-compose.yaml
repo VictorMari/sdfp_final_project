@@ -5,6 +5,9 @@ services:
     user: '104'
     volumes: ['./cli/configs/grafana/provisioning:/etc/grafana/provisioning:z', './cli/configs/grafana/dashboards:/var/lib/grafana/dashboards:z',
       './cli/configs/grafana/grafana.ini:/etc/grafana/grafana.ini:z']
+  node-exporter:
+    image: prom/node-exporter
+    ports: ['9100:9100']
   prometheus:
     image: prom/prometheus
     network_mode: host
